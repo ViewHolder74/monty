@@ -42,6 +42,10 @@ int main(int argc, char *argv[])
 				pall(&stack, line_num);
 			else if (strcmp(opcode, "pint") == 0)
 				pint(&stack, line_num);
+			else if (strcmp(opcode, "pop") == 0)
+				pop(&stack, line_num);
+			else if (strcmp(opcode, "swap") == 0)
+				swap(&stack, line_num);
 			else
 			{
 				fprintf(stderr, "L%d: unknown instructions %s", line_num, opcode);

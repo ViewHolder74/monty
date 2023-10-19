@@ -40,6 +40,8 @@ int main(int argc, char *argv[])
 				push(&stack, line_num);
 			else if (strcmp(opcode, "pall") == 0)
 				pall(&stack, line_num);
+			else if (strcmp(opcode, "pint") == 0)
+				pint(&stack, line_num);
 			else
 			{
 				fprintf(stderr, "L%d: unknown instructions %s", line_num, opcode);

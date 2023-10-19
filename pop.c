@@ -7,16 +7,18 @@
  * @counter: line_number
  * Return: no return
 */
-void pop(stack_t **stack, unsigned int counter)
+void pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *h;
+	stack_t *temp;
 
 	if (*stack == NULL)
 	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	h = *stack;
-	*stack = h->next;
-	free(h);
+	temp = *stack;
+	*stack = (*stack)->next;
+	if (*stack)
+		(*stack)->prev = NULL;
+	free(temp);
 }

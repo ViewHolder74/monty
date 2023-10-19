@@ -4,6 +4,53 @@
 #include <string.h>
 #include "monty.h"
 
+
+int execute_opcode(char *opcode, stack_t **stack, unsigned int line_num)
+{
+	int i = 0;
+
+	instruction_t opcodes[] = {
+		{"push", push},
+		{"pall", pall},
+		{"pint", pint},
+		{"pop", pop},
+		{"swap", swap},
+		{"add", add},
+		{NULL, NULL}
+	};
+	while (opcodes[i].opcode)
+	{
+		if (strcmp(opcode, opcodes[i].opcode) == 0)
+		{
+			opcodes[i].f(stack, line_num);
+			return (1);
+		}
+		i++;
+	}
+	fprintf(stderr, "L%d: unknown instruction %s\n", line_num, opcode);
+	return (0);
+}
+
+/**
+ * free_stack - Free allocated memory
+ * @stack: Pointer to the stack
+ * @line: Pointer to the line buffer
+ * @file: Pointer to the file
+ * Return: void
+ */
+
+void free_stack(stack_t **stack, char *line, FILE *file)
+{
+	while(*stack)
+	{
+		(*stack) = (*stack)->next;
+		free(*stack);
+		*stack = *stack;
+	}
+	free(line);
+	fclose(file);
+}
+
 /**
  * main - program entry
  * @argc: argument count
@@ -36,27 +83,14 @@ int main(int argc, char *argv[])
 		opcode = strtok(line, " \t\n");
 		if (opcode)
 		{
-			if (strcmp(opcode, "push") == 0)
-				push(&stack, line_num);
-			else if (strcmp(opcode, "pall") == 0)
-				pall(&stack, line_num);
-			else if (strcmp(opcode, "pint") == 0)
-				pint(&stack, line_num);
-			else if (strcmp(opcode, "pop") == 0)
-				pop(&stack, line_num);
-			else if (strcmp(opcode, "swap") == 0)
-				swap(&stack, line_num);
-			else
+			if (!execute_opcode(opcode, &stack, line_num))
 			{
-				fprintf(stderr, "L%d: unknown instructions %s", line_num, opcode);
-				free(line);
-				fclose(file);
+				free_stack(&stack, line, file);
 				return (EXIT_FAILURE);
 			}
 		}
 		line_num++;
 	}
-	free(line);
-	fclose(file);
-	return (0);
+	free_stack(&stack, line, file);
+	return (EXIT_SUCCESS);
 }

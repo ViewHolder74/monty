@@ -39,9 +39,7 @@ int main(int argc, char *argv[])
 			if (strcmp(opcode, "push") == 0)
 				push(&stack, line_num);
 			else if (strcmp(opcode, "pall") == 0)
-			{
 				pall(&stack, line_num);
-			}
 			else
 			{
 				fprintf(stderr, "L%d: unknown instructions %s", line_num, opcode);
@@ -55,5 +53,4 @@ int main(int argc, char *argv[])
 	free(line);
 	fclose(file);
 	return (0);
-
 }

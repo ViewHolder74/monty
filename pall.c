@@ -7,13 +7,13 @@
  * @line_number: line nu,ber
  * Return: void
  */
-void pall(stack_t **stack, unsigned int line_number)
+void pall(stack_t **top, unsigned int counter)
 {
-	(void)line_number;
+	(void)counter;
 
-	while (*stack != NULL)
+	while (*top != NULL)
 	{
-		printf("%d\n", (*stack)->n);
-		*stack = (*stack)->next;
+		printf("%d\n", (*top)->n);
+		*top = (*top)->next;
 	}
 }

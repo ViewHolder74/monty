@@ -7,12 +7,12 @@
  * @counter: line_number
  * Return: no return
 */
-void swap(stack_t **stack, unsigned int counter)
+void swap(stack_t **top, unsigned int counter)
 {
 	stack_t *h;
 	int len = 0, curr;
 
-	h = *stack;
+	h = *top;
 	while (h)
 	{
 		h = h->next;
@@ -23,7 +23,7 @@ void swap(stack_t **stack, unsigned int counter)
 		fprintf(stderr, "L%d: can't swap, stack too short\n", counter);
 		exit(EXIT_FAILURE);
 	}
-	h = *stack;
+	h = *top;
 	curr = h->n;
 	h->n = h->next->n;
 	h->next->n = curr;

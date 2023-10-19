@@ -7,7 +7,7 @@
  * @line_number: line nu,ber
  * Return: void
  */
-void pall(stackIsh **stack, unsigned int line_number)
+void pall(stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;
 

@@ -17,6 +17,7 @@ int execute_opcode(char *opcode, stack_t **stack, unsigned int line_num)
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
+		{"sub", sub},
 		{NULL, NULL}
 	};
 	while (opcodes[i].opcode)

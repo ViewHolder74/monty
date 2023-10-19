@@ -4,8 +4,14 @@
 #include <string.h>
 #include "monty.h"
 
-
-int execute_opcode(char *opcode, stack_t **stack, unsigned int line_num)
+/**
+ * execute_opcode - execute opcode
+ * @opcode: opcode
+ * @top: pointer to head
+ * @counter: line number
+ * Return: 0 or 1
+ */
+int execute_opcode(char *opcode, stack_t **top, unsigned int counter)
 {
 	int i = 0;
 
@@ -24,30 +30,30 @@ int execute_opcode(char *opcode, stack_t **stack, unsigned int line_num)
 	{
 		if (strcmp(opcode, opcodes[i].opcode) == 0)
 		{
-			opcodes[i].f(stack, line_num);
+			opcodes[i].f(top, counter);
 			return (1);
 		}
 		i++;
 	}
-	fprintf(stderr, "L%d: unknown instruction %s\n", line_num, opcode);
+	fprintf(stderr, "L%d: unknown instruction %s\n", counter, opcode);
 	return (0);
 }
 
 /**
  * free_stack - Free allocated memory
- * @stack: Pointer to the stack
+ * @top: Pointer to the stack
  * @line: Pointer to the line buffer
  * @file: Pointer to the file
  * Return: void
  */
 
-void free_stack(stack_t **stack, char *line, FILE *file)
+void free_stack(stack_t **top, char *line, FILE *file)
 {
-	while(*stack)
+	while (*top)
 	{
-		(*stack) = (*stack)->next;
-		free(*stack);
-		*stack = *stack;
+		(*top) = (*top)->next;
+		free(*top);
+		*top = *top;
 	}
 	free(line);
 	fclose(file);
@@ -62,7 +68,7 @@ void free_stack(stack_t **stack, char *line, FILE *file)
 
 int main(int argc, char *argv[])
 {
-	stack_t *stack = NULL;
+	stack_t *top = NULL;
 	ssize_t read_line;
 	FILE *file;
 	size_t size = 0;
@@ -85,14 +91,14 @@ int main(int argc, char *argv[])
 		opcode = strtok(line, " \t\n");
 		if (opcode)
 		{
-			if (!execute_opcode(opcode, &stack, line_num))
+			if (!execute_opcode(opcode, &top, line_num))
 			{
-				free_stack(&stack, line, file);
+				free_stack(&top, line, file);
 				return (EXIT_FAILURE);
 			}
 		}
 		line_num++;
 	}
-	free_stack(&stack, line, file);
+	free_stack(&top, line, file);
 	return (EXIT_SUCCESS);
 }

@@ -5,16 +5,16 @@
 
 /**
  * pint - print the element in stack
- * @stack: pointer to head
- * @line_number: line number
+ * @top: pointer to head
+ * @counter: line number
  * Return: void
  */
-void pint(stack_t **stack, unsigned int line_number)
+void pint(stack_t **top, unsigned int counter)
 {
-	if (*stack == NULL)
+	if (*top == NULL)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%d: can't pint, stack empty\n", counter);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", (*stack)->n);
+	printf("%d\n", (*top)->n);
 }

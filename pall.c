@@ -3,8 +3,8 @@
 #include <stdlib.h>
 /**
  * pall - a function that print all values on the stack
- * *stack: pointer to head
- * @line_number: line nu,ber
+ * @top: pointer to head
+ * @counter: line nu,ber
  * Return: void
  */
 void pall(stack_t **top, unsigned int counter)

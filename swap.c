@@ -3,7 +3,7 @@
 #include <stdio.h>
 /**
  * swap - adds the top two elements of the stack.
- * @stack: stack head
+ * @top: stack head
  * @counter: line_number
  * Return: no return
 */

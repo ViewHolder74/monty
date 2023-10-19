@@ -4,13 +4,13 @@
 
 /**
  * nop - Does nothing
- * @stack: Pointer to the head of the stack
- * @line_number: Line number in the Monty byte code file
+ * @top: Pointer to the head of the stack
+ * @counter: Line number in the Monty byte code file
  * Return: void
  */
-void nop(stack_t **stack, unsigned int line_number)
+void nop(stack_t **top, unsigned int counter)
 {
-	(void)stack;
-	(void)line_number;
+	(void)top;
+	(void)counter;
 }
 

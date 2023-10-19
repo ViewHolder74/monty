@@ -3,8 +3,8 @@
 #include <stdio.h>
 /**
  * pop - prints the top
- * @stack: stack head
- * @line_number: line_number
+ * @top: stack head
+ * @counter: line_number
  * Return: no return
 */
 void pop(stack_t **top, unsigned int counter)

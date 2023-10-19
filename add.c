@@ -4,17 +4,18 @@
 
 /**
  * add - Add the top two elements of the stack
- * @stack: Pointer to the head of the stack
- * @line_number: Line number in the Monty byte code file
+ * @top: Pointer to the head of the stack
+ * @counter: Line number in the Monty byte code file
+ * Return: void
  */
-void add(stack_t **stack, unsigned int line_number)
+void add(stack_t **top, unsigned int counter)
 {
-	if (*stack == NULL || (*stack)->next == NULL)
+	if (*top == NULL || (*top)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't add, stack too short\n", counter);
 		exit(EXIT_FAILURE);
 	}
-	(*stack)->next->n += (*stack)->n;
-	pop(stack, line_number);
+	(*top)->next->n += (*top)->n;
+	pop(top, counter);
 }
 

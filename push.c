@@ -4,21 +4,21 @@
 #include <string.h>
 /**
  * push - Pushes an element onto the stack.
- * @stack: Pointer to the head of the stack.
- * @line_number: Line number in the Monty byte code file.
+ * @top: Pointer to the head of the stack.
+ * @counter: Line number in the Monty byte code file.
+ * Return: void
  */
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **top, unsigned int counter)
 {
 	char *arg = strtok(NULL, " \t\n");
 	int value;
 	stack_t *new_node;
-	
+
 	if (!arg || (*arg != '-' && (*arg < '0' || *arg > '9')))
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		fprintf(stderr, "L%d: usage: push integer\n", counter);
 		exit(EXIT_FAILURE);
 	}
-	
 	value = atoi(arg);
 	new_node = malloc(sizeof(stack_t));
 	if (!new_node)
@@ -28,8 +28,8 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	new_node->n = value;
 	new_node->prev = NULL;
-	new_node->next = *stack;
-	if (*stack)
-		(*stack)->prev = new_node;
-	*stack = new_node;
+	new_node->next = *top;
+	if (*top)
+		(*top)->prev = new_node;
+	*top = new_node;
 }

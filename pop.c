@@ -4,7 +4,7 @@
 /**
  * pop - prints the top
  * @stack: stack head
- * @counter: line_number
+ * @line_number: line_number
  * Return: no return
 */
 void pop(stack_t **stack, unsigned int line_number)

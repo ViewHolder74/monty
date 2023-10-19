@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	ssize_t read_line;
 	FILE *file;
 	size_t size = 0;
-	char *line, *opcode;
+	char *line = NULL, *opcode;
 	unsigned int line_num = 1;
 
 	if (argc != 2)
@@ -31,10 +31,8 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		return (EXIT_FAILURE);
 	}
-	while (read_line > 0)
+	while ((read_line = getline(&line, &size, file)) != -1)
 	{
-		line = NULL;
-		read_line = getline(&line, &size, file);
 		opcode = strtok(line, " \t\n");
 		if (opcode)
 		{
